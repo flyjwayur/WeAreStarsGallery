@@ -1,18 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Image Gallery</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
+
 <body>
     <h1 class="intro">Integrify Image Gallery</h1>
-    
-    <div class="imageWrapper"></div>
+
+    <div class="imageWrapper">
+        <div id="imgModal" class="modal">
+            <span class="close cursor" onclick="closeModal()">&times;</span>
+            <div class="modal_content"></div>
+        </div>
+    </div>
 
     <script src="js/photosImport.js"></script>
     <script src="js/main.js"></script>
 
 </body>
+
 </html>
