@@ -107,10 +107,10 @@ body {
 }
 
 .infoContainer {
-  z-index: 3;
   display: none;
   position: absolute;
-  width: 100px;
-  height: 200px;
+  width: 200px;
+	height: 300px;
+	border-radius: 20px;
   border: 2px solid #ccc;
 }

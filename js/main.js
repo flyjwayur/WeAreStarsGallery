@@ -20,6 +20,8 @@ window.onload = () => {
     this.y = Math.random() * canvas.height;
     this.radius = Math.random() * 20;
     this.selected = false;
+    this.index = 0;
+    this.name = "";
 
     this.draw = function() {
       ctx.save();
@@ -31,10 +33,22 @@ window.onload = () => {
 
       ctx.fillStyle = "#fff";
       ctx.fill();
-
       ctx.closePath();
       ctx.restore();
     };
+
+    this.writeName = function(firstname, posX, posY){
+      var gradient = ctx.createLinearGradient(0, 0, 0, (canvas.height - 100));
+      gradient.addColorStop("0","yellow");
+      gradient.addColorStop("0.5","lightblue");
+      gradient.addColorStop("1.0","white");
+
+      ctx.font = "30px Comic Sans MS";
+      ctx.textAlign = "center";
+      ctx.lineWidth = 1;
+      ctx.strokeStyle=gradient;
+      ctx.strokeText(firstname, posX, posY);
+    }
 
     this.drawBiggerStar = function() {
       ctx.save();
@@ -54,7 +68,7 @@ window.onload = () => {
     let numStar = 19;
     for (let i = 0; i < numStar; i++) {
       stars.push(new Star());
-     }
+    }
     // for (let i = 0; i < numStar; i++) {
     //   let angle = ((i * 10) / (numStar / 2)) * Math.PI;
     //   let x = 200 * Math.cos(angle) + canvas.width / 2;
@@ -66,16 +80,24 @@ window.onload = () => {
 
   const stars = createStars();
   console.log(stars);
-  const drawStars = () => {
-    for (let star of stars) {
+
+  const drawStarsWithName = () => {
+    stars.forEach((star, index)=>{
+      star.index = index;
+      infoData.forEach((eachInfo, index) => {
+        if(star.index == index){
+          star.name = eachInfo.firstName;
+          star.writeName(eachInfo.firstName, star.x, star.y);}     
+      })
       star.draw();
-    }
-  };
+    })  
+  }
+  
+  drawStarsWithName();
 
-  drawStars();
 
-  const isClickInArc = function(mouseX, mouseY, arc) {
-    let radius = arc.radius;
+  const isClickInStar = function(mouseX, mouseY, star) {
+    let radius = star.radius;
     //   console.log(mouseX, mouseY, "radius:", radius, "arc.x:",arc.x, "arc.y:", arc.y);
     //   console.log(
     //       "leftside", (Math.pow((mouseX - arc.x), 2) + Math.pow((mouseY - arc.y), 2))
@@ -83,11 +105,12 @@ window.onload = () => {
     //     (Math.pow((mouseX - arc.x), 2) + Math.pow((mouseY - arc.y), 2)) <= Math.pow(radius,2)
     //   );
     return (
-      Math.pow(mouseX - arc.x, 2) + Math.pow(mouseY - arc.y, 2) <=
+      Math.pow(mouseX - star.x, 2) + Math.pow(mouseY - star.y, 2) <=
       Math.pow(radius, 2)
     );
   };
 
+  //Create the modal box;
   const createModalBox = () => {
     let container = document.querySelector(".container");
     let newInfoContainer = document.createElement("div");
@@ -97,6 +120,36 @@ window.onload = () => {
   };
 
   createModalBox();
+
+  //Get image data and display them inside of parent element
+  const displayImgs = () => {
+    const infoContainer = document.querySelector(".infoContainer");
+    infoData.forEach((info, index) => {
+      infoContainer.insertAdjacentHTML(
+        "beforeend",
+        `<img src="images/${
+          info.src
+        }" alt="info.src" width="300px", height="400px"
+            onclick="openModal();currentSlide(${index})" class="default-images">`
+      );
+    });
+  };
+
+  //displayImgs();
+  const displayModal = () => {
+    //createModalHTMLelements(); // check!!
+    let modal_content = document.querySelector(".modal_content");
+    infoData.forEach((info, index) => {
+      let slideIndex = index + 1;
+      modal_content.insertAdjacentHTML(
+        "beforeend",
+        `<div class="imgSlide"><div class="numbertext">${slideIndex} / ${
+          infoData.length
+        }</div><img src="images/${info.src}" style="width:100px"></div>`
+      );
+    });
+  };
+
 
   canvas.addEventListener("click", e => {
     stars.forEach(star => {
@@ -112,7 +165,7 @@ window.onload = () => {
       }
 
       if (
-        isClickInArc(mouseX, mouseY, star)
+        isClickInStar(mouseX, mouseY, star)
         // (mouseX >= (stars[i].x - stars[i].radius))
         //  && (mouseX <= (stars[i].x + stars[i].radius))
         //  && (mouseY >= (stars[i].y - stars[i].radius))
@@ -124,6 +177,8 @@ window.onload = () => {
           selectedinfoCon.style.top = `${mouseY - canvas.height / 3}px`;
           selectedinfoCon.style.left = `${mouseX}px`;
           selectedinfoCon.style.display = "block";
+          console.log("seleted star index:",star.index);
+          //displayModal();
         } else {
           selectedinfoCon.style.display = "none";
         }
@@ -131,8 +186,6 @@ window.onload = () => {
         ctx.arc(mouseX, mouseY, 10, 0, Math.PI * 2);
         ctx.stroke();
       }
-
-      console.log(stars);
     });
     //let starSize = ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2, false);
     //}
@@ -258,17 +311,4 @@ const displayImgs = () => {
 
 //displayImgs();
 
-const displayModal = () => {
-  //createModalHTMLelements(); // check!!
-  let modal_content = document.querySelector(".modal_content");
-  infoData.forEach((info, index) => {
-    let slideIndex = index + 1;
-    modal_content.insertAdjacentHTML(
-      "beforeend",
-      `<div class="imgSlide"><div class="numbertext">${slideIndex} / ${
-        infoData.length
-      }</div><img src="images/${info.src}" style="width:100%"></div>`
-    );
-  });
-};
-displayModal();
+
