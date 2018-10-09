@@ -15,10 +15,10 @@ window.onload = () => {
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
   //Draw Stars
-  function Star(x, y, angle) {
-    this.x = x;
-    this.y = y; 
-    this.radius = angle;
+  function Star() {
+    this.x = Math.random() * canvas.width;
+    this.y = Math.random() * canvas.height;
+    this.radius = Math.random() * 20;
     this.selected = false;
 
     this.draw = function() {
@@ -52,15 +52,15 @@ window.onload = () => {
   const createStars = () => {
     let stars = [];
     let numStar = 19;
-    // for (let i = 0; i < 20; i++) {
-      
+    for (let i = 0; i < numStar; i++) {
+      stars.push(new Star());
+     }
+    // for (let i = 0; i < numStar; i++) {
+    //   let angle = ((i * 10) / (numStar / 2)) * Math.PI;
+    //   let x = 200 * Math.cos(angle) + canvas.width / 2;
+    //   let y = 200 * Math.sin(angle) + canvas.height / 2;
+    //   stars.push(new Star(x, y, angle));
     // }
-    for(let i = 0; i< numStar; i++){
-        let angle = (i * 10 / (numStar/2)) * Math.PI;
-        let x = (200 * Math.cos(angle)) + canvas.width / 2;
-        let y = (200 * Math.sin(angle)) + canvas.height / 2;  
-        stars.push(new Star(x, y, angle));  
-    }
     return stars;
   };
 
@@ -75,52 +75,68 @@ window.onload = () => {
   drawStars();
 
   const isClickInArc = function(mouseX, mouseY, arc) {
-      let radius = arc.radius;
+    let radius = arc.radius;
     //   console.log(mouseX, mouseY, "radius:", radius, "arc.x:",arc.x, "arc.y:", arc.y);
     //   console.log(
     //       "leftside", (Math.pow((mouseX - arc.x), 2) + Math.pow((mouseY - arc.y), 2))
     //       , "rightside", Math.pow(radius,2),
     //     (Math.pow((mouseX - arc.x), 2) + Math.pow((mouseY - arc.y), 2)) <= Math.pow(radius,2)
     //   );
-      return (Math.pow((mouseX - arc.x), 2) + Math.pow((mouseY - arc.y), 2)) <= Math.pow(radius,2);
-  }
- 
+    return (
+      Math.pow(mouseX - arc.x, 2) + Math.pow(mouseY - arc.y, 2) <=
+      Math.pow(radius, 2)
+    );
+  };
+
+  const createModalBox = () => {
+    let container = document.querySelector(".container");
+    let newInfoContainer = document.createElement("div");
+    newInfoContainer.style.backgroundColor = "yellow";
+    newInfoContainer.className = "infoContainer";
+    container.appendChild(newInfoContainer);
+  };
+
+  createModalBox();
+
   canvas.addEventListener("click", e => {
+    stars.forEach(star => {
+      //for(let i = 0; i < stars.length; i++){
+      //console.log(isClickInArc(mouseX, mouseY, star));
+      let selectedinfoCon = document.querySelector(".infoContainer");
       let rect = canvas.getBoundingClientRect();
       let mouseX = e.clientX - rect.left;
       let mouseY = e.clientY - rect.top;
-      let container = document.querySelector('.container');
-      
-      stars.forEach( star => {
-          //for(let i = 0; i < stars.length; i++){
-              console.log(isClickInArc(mouseX, mouseY, star));
-              
-            if (isClickInArc(mouseX, mouseY, star)
-                
-                // (mouseX >= (stars[i].x - stars[i].radius))
-                //  && (mouseX <= (stars[i].x + stars[i].radius))
-                //  && (mouseY >= (stars[i].y - stars[i].radius))
-                //  && (mouseY <= (stars[i].y + stars[i].radius))
-                 
-                 ){
-                    let infoContainer = document.createElement('div');
-                    infoContainer.style.backgroundColor = "yellow";
-                    infoContainer.style.top = `${mouseY - (canvas.height/3)}px`;
-                    infoContainer.style.left = `${mouseX}px`;
-                    infoContainer.classList.add("infoContainer", "selected");
-                    container.appendChild(infoContainer); 
-                    ctx.beginPath();
-                    ctx.arc(mouseX, mouseY, 10, 0, Math.PI * 2);
-                    ctx.stroke();
-                        //infoContainer.style.display = "block";
-                }else{
-                    //infoContainer.style.display = "none";
-                    console.log("hello");
-                }
-          })
-        //let starSize = ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2, false);
-  //}
-    })
+
+      if (star.selected === true) {
+        star.selected = false;
+      }
+
+      if (
+        isClickInArc(mouseX, mouseY, star)
+        // (mouseX >= (stars[i].x - stars[i].radius))
+        //  && (mouseX <= (stars[i].x + stars[i].radius))
+        //  && (mouseY >= (stars[i].y - stars[i].radius))
+        //  && (mouseY <= (stars[i].y + stars[i].radius))
+      ) {
+        //star.selected = !star.selected;
+        star.selected = true;
+        if (star.selected === true) {
+          selectedinfoCon.style.top = `${mouseY - canvas.height / 3}px`;
+          selectedinfoCon.style.left = `${mouseX}px`;
+          selectedinfoCon.style.display = "block";
+        } else {
+          selectedinfoCon.style.display = "none";
+        }
+        ctx.beginPath();
+        ctx.arc(mouseX, mouseY, 10, 0, Math.PI * 2);
+        ctx.stroke();
+      }
+
+      console.log(stars);
+    });
+    //let starSize = ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2, false);
+    //}
+  });
 
   //Mouse event
 
@@ -154,7 +170,7 @@ window.onload = () => {
 
     canvas.addEventListener("mousedown", onMouseDown); */
 
- /*    const onMouseMove = e => {
+  /*    const onMouseMove = e => {
         //let rect = canvas.getBoundingClientRect();
         //let mouseX = e.clientX - rect.left;
         //let mouseY = e.clientY - rect.top;
@@ -170,9 +186,6 @@ window.onload = () => {
 
     canvas.addEventListener("mouseup", onMouseMove); */
 };
-
-
-
 
 //openModal
 const openModal = () => {
