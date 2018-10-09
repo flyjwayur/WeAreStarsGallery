@@ -212,7 +212,7 @@ drawStarsWithName();
 
 createImageOnStars();
 
-  canvas.addEventListener("click", e => {
+  canvas.addEventListener("mousemove", e => {
     stars.forEach(star => {
       //for(let i = 0; i < stars.length; i++){
       //console.log(isClickInArc(mouseX, mouseY, star));
