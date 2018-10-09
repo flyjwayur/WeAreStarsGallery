@@ -27,10 +27,6 @@
   --white: #ffffff;
 }
 
-.intro {
-  fontfmaily: var(--font-title);
-}
-
 body {
   margin: auto;
 }

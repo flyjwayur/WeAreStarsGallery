@@ -14,6 +14,20 @@ window.onload = () => {
   ctx.fillStyle = backgroundGradient;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
+  function writeIntegrify(){
+      var gradient = ctx.createLinearGradient(0, 0, (canvas.width * 1.2), 0);
+      gradient.addColorStop("0","yellow");
+      gradient.addColorStop("0.5","lightblue");
+      gradient.addColorStop("1.0","white");
+
+      ctx.font = `${(canvas.width)/15}px Times New Roman, Times, serif`;
+      ctx.textAlign = "center";
+  
+      ctx.fillStyle = gradient;
+      ctx.fillText('Integrify', canvas.width/2, canvas.height/2);
+  }
+
+  writeIntegrify();
   //Draw Stars
   function Star(starX, starY) {
     this.x = starX;
@@ -55,9 +69,12 @@ window.onload = () => {
 
       ctx.font = "30px Comic Sans MS";
       ctx.textAlign = "center";
-      ctx.lineWidth = 1;
-      ctx.strokeStyle=gradient;
-      ctx.strokeText(firstname, posX, posY);
+      //ctx.lineWidth = 1;
+      //ctx.strokeStyle=gradient;
+      //ctx.strokeText(firstname, posX, posY);
+
+      ctx.fillStyle = gradient;
+      ctx.fillText(firstname, posX, posY);
     }
 
     this.drawBiggerStar = function() {
@@ -234,7 +251,7 @@ drawStarsWithName();
     })
   };
 
-createImageOnStars();
+//createImageOnStars();
 
   canvas.addEventListener("mousemove", e => {
     stars.forEach(star => {
