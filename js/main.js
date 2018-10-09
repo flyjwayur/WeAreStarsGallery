@@ -15,9 +15,9 @@ window.onload = () => {
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
   //Draw Stars
-  function Star() {
-    this.x = Math.random() * canvas.width;
-    this.y = Math.random() * canvas.height;
+  function Star(starX, starY) {
+    this.x = starX;
+    this.y = starY;
     this.radius = Math.random() * 20;
     this.selected = false;
     this.index = 0;
@@ -72,19 +72,43 @@ window.onload = () => {
     };
   }
 
+  const isFarEnoughFromOtherStars = (randomX, randomY, stars) => {
+    
+    if (stars.length > 0) {
+      let distanceToKeep = stars[0].radius * 2.2;
+      for(let star of stars){
+        if (Math.abs(star.x - randomX) < distanceToKeep &&
+            Math.abs(star.y - randomY) < distanceToKeep) {
+          return false;
+        } 
+      }
+      return true;
+    }
+  }
+
   //Star creations
   const createStars = () => {
     let stars = [];
     let numStar = 19;
-    for (let i = 0; i < numStar; i++) {
-      stars.push(new Star());
-    }
     // for (let i = 0; i < numStar; i++) {
-    //   let angle = ((i * 10) / (numStar / 2)) * Math.PI;
-    //   let x = 200 * Math.cos(angle) + canvas.width / 2;
-    //   let y = 200 * Math.sin(angle) + canvas.height / 2;
-    //   stars.push(new Star(x, y, angle));
+    //   let randomX = Math.random() * canvas.width * 0.8 + canvas.width * 0.1;
+    //   let randomY = Math.random() * canvas.height * 0.7 + canvas.height * 0.15;
+    //   for (let j = 0; j < 5 ; j++) {
+    //     if (!isFarEnoughFromOtherStars(randomX, randomY, stars)) {
+    //       randomX = Math.random() * canvas.width * 0.8 + canvas.width * 0.1;
+    //       randomY = Math.random() * canvas.height * 0.7 + canvas.height * 0.15;
+    //     } else {
+    //       break;
+    //     }
+    //   }
+    //   stars.push(new Star(randomX, randomY));
     // }
+    for (let i = 0; i < numStar; i++) {
+      let angle = (i / (numStar / 2)) * Math.PI;
+      let x = (canvas.width * 0.4) * Math.cos(angle) + canvas.width / 2;
+      let y = (canvas.height * 0.35) * Math.sin(angle) + canvas.height / 2;
+      stars.push(new Star(x, y));
+    }
     return stars;
   };
 
