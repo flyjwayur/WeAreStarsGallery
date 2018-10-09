@@ -22,6 +22,7 @@ window.onload = () => {
     this.selected = false;
     this.index = 0;
     this.name = "";
+    this.img = "";
 
     this.draw = function() {
       ctx.save();
@@ -36,6 +37,15 @@ window.onload = () => {
       ctx.closePath();
       ctx.restore();
     };
+
+    this.drawImage = function(src){
+      let newImage = new Image();
+      newImage.src = `images/${src}`;
+      console.log(newImage.src);
+      newImage.addEventListener("load", () => {
+        ctx.drawImage(newImage, this.x, this.y, 100, 150);
+    }) 
+    }
 
     this.writeName = function(firstname, posX, posY){
       var gradient = ctx.createLinearGradient(0, 0, 0, (canvas.height - 100));
@@ -86,15 +96,57 @@ window.onload = () => {
       star.index = index;
       infoData.forEach((eachInfo, index) => {
         if(star.index == index){
-          star.name = eachInfo.firstName;
-          star.writeName(eachInfo.firstName, star.x, star.y);}     
+          star.name = eachInfo.firstName
+          star.writeName(eachInfo.firstName, star.x, star.y);
+        }     
       })
-      star.draw();
+      //star.draw();
     })  
   }
-  
-  drawStarsWithName();
+drawStarsWithName();
 
+
+  //Draw star
+  const drawStar = () => {
+    stars.forEach((star, index) => { 
+      star.index = index;
+      star.draw();
+    })
+  }
+
+  drawStar();
+
+  //const allImageSources = getAllimageSources();
+  //loadedImages(allImageSources, )
+  
+  //Draw small image on star
+  const drawImageOnStar = () => {
+    stars.forEach((star, index)=>{
+      star.index = index;
+      infoData.forEach((eachInfo, index) => {
+        if(star.index == index){
+          star.img = eachInfo.src;
+          star.drawImage(star.img);
+        }})
+    });
+  } 
+
+  drawImageOnStar();
+
+          //star.writeName(eachInfo.firstName, star.x, star.y);}     
+  
+  /*
+  const displayImgsOnModal = (imageX, imageY) => {
+
+    infoData.forEach(eachInfo => {
+      console.log(eachInfo.src);
+      image.src = `images/${eachInfo.src}`;
+    })
+    console.log(image);
+    image.addEventListener("load", () => {
+        star.drawImage(image, imageX, imageY, 100, 200);
+    }) 
+  }*/
 
   const isClickInStar = function(mouseX, mouseY, star) {
     let radius = star.radius;
@@ -114,12 +166,14 @@ window.onload = () => {
   const createModalBox = () => {
     let container = document.querySelector(".container");
     let newInfoContainer = document.createElement("div");
-    newInfoContainer.style.backgroundColor = "yellow";
+    newInfoContainer.style.backgroundColor = "transparent";
     newInfoContainer.className = "infoContainer";
     container.appendChild(newInfoContainer);
   };
 
   createModalBox();
+
+ 
 
   //Get image data and display them inside of parent element
   const displayImgs = () => {
@@ -174,10 +228,14 @@ window.onload = () => {
         //star.selected = !star.selected;
         star.selected = true;
         if (star.selected === true) {
-          selectedinfoCon.style.top = `${mouseY - canvas.height / 3}px`;
-          selectedinfoCon.style.left = `${mouseX}px`;
+          let infoContainerX = `${mouseY - canvas.height / 3}px`;
+          let infoContainerY = `${mouseX}px`;
+          selectedinfoCon.style.top = infoContainerX;
+          selectedinfoCon.style.left = infoContainerY
           selectedinfoCon.style.display = "block";
           console.log("seleted star index:",star.index);
+          //drawStarsWithImage(infoContainerX, infoContainerY);
+          //displayImgsOnModal();
           //displayModal();
         } else {
           selectedinfoCon.style.display = "none";
