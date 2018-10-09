@@ -32,7 +32,7 @@ window.onload = () => {
   function Star(starX, starY) {
     this.x = starX;
     this.y = starY;
-    this.radius = Math.random() * 20;
+    this.radius = Math.random() * 10 + 10;
     this.selected = false;
     this.index = 0;
     this.name = "";
