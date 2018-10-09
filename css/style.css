@@ -116,5 +116,8 @@ body {
 }
 
 img{
-	border-radius: 20px;
+	width: 30px;
+	height: 100px;
+	border-radius: 50%;
+	position: absolute;
 }

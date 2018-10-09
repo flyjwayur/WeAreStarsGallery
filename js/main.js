@@ -97,7 +97,7 @@ window.onload = () => {
       infoData.forEach((eachInfo, index) => {
         if(star.index == index){
           star.name = eachInfo.firstName
-          star.writeName(eachInfo.firstName, star.x, star.y);
+          star.writeName(eachInfo.firstName, star.x-10, star.y-25);
         }     
       })
       //star.draw();
@@ -131,7 +131,7 @@ drawStarsWithName();
     });
   } 
 
-  drawImageOnStar();
+  //drawImageOnStar();
 
           //star.writeName(eachInfo.firstName, star.x, star.y);}     
   
@@ -190,20 +190,27 @@ drawStarsWithName();
   };
 
   //displayImgs();
-  const displayModal = () => {
-    //createModalHTMLelements(); // check!!
-    let modal_content = document.querySelector(".modal_content");
-    infoData.forEach((info, index) => {
-      let slideIndex = index + 1;
-      modal_content.insertAdjacentHTML(
-        "beforeend",
-        `<div class="imgSlide"><div class="numbertext">${slideIndex} / ${
-          infoData.length
-        }</div><img src="images/${info.src}" style="width:100px"></div>`
-      );
-    });
+
+  const createImageOnStars = () => {
+    let container = document.querySelector('.container');
+
+    stars.forEach((star, index) => {
+      star.index = index;
+      infoData.forEach((info, index) => {
+        if(star.index == index){
+          let newImage = document.createElement('img');
+          newImage.src = `images/${info.src}`;
+          newImage.style.width = "100px";
+          newImage.style.position = "absolute";
+          newImage.style.top = `${star.y}px`;
+          newImage.style.left = `${star.x}px`;
+          container.appendChild(newImage);
+        }
+      });
+    })
   };
 
+createImageOnStars();
 
   canvas.addEventListener("click", e => {
     stars.forEach(star => {
