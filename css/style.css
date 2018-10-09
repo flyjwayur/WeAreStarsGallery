@@ -102,6 +102,10 @@ cursor: pointer;
     position: relative;
 }
 
+#canvas{
+  position: relative;
+}
+
 .infoContainer{
     z-index: 3;
     position: absolute;

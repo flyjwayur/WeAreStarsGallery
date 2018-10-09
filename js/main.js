@@ -91,11 +91,11 @@ window.onload = () => {
       let mouseY = e.clientY - rect.top;
       let container = document.querySelector('.container');
       
-      //stars.forEach( star => {
-          for(let i = 0; i < stars.length; i++){
-              console.log(isClickInArc(mouseX, mouseY, stars[i]));
+      stars.forEach( star => {
+          //for(let i = 0; i < stars.length; i++){
+              console.log(isClickInArc(mouseX, mouseY, star));
               
-            if (isClickInArc(mouseX, mouseY, stars[i])
+            if (isClickInArc(mouseX, mouseY, star)
                 
                 // (mouseX >= (stars[i].x - stars[i].radius))
                 //  && (mouseX <= (stars[i].x + stars[i].radius))
@@ -103,6 +103,12 @@ window.onload = () => {
                 //  && (mouseY <= (stars[i].y + stars[i].radius))
                  
                  ){
+                    let infoContainer = document.createElement('div');
+                    infoContainer.style.backgroundColor = "yellow";
+                    infoContainer.style.top = `${mouseY - (canvas.height/3)}px`;
+                    infoContainer.style.left = `${mouseX}px`;
+                    infoContainer.classList.add("infoContainer", "selected");
+                    container.appendChild(infoContainer); 
                     ctx.beginPath();
                     ctx.arc(mouseX, mouseY, 10, 0, Math.PI * 2);
                     ctx.stroke();
@@ -111,11 +117,10 @@ window.onload = () => {
                     //infoContainer.style.display = "none";
                     console.log("hello");
                 }
-          }
+          })
         //let starSize = ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2, false);
-        
-      //})
-  })
+  //}
+    })
 
   //Mouse event
 
