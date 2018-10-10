@@ -4,7 +4,7 @@ const closeModal = () => {
 };
 
 // Draw Star and background
-window.onload = () => {
+const drawCanvas = () => {
   const canvas = document.querySelector("canvas");
   const ctx = canvas.getContext("2d");
   const image = document.createElement("img");
@@ -484,8 +484,12 @@ window.onload = () => {
         if(selectedContainer){
             selectedContainer.style.display = "none";
         }
-        //ctx.clearRect(infoContainer.x, infoContainer.y, infoContainer.width, infoContainer.height);
+        //ctx.clearRect(infoContainer.x, ifoContainer.y, infoContainer.width, infoContainer.height);
     }
 
     canvas.addEventListener("mouseup", onMouseMove); */
 };
+
+window.onload = drawCanvas;
+
+window.addEventListener("resize", drawCanvas);
