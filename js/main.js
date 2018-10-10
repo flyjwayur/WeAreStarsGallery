@@ -2,6 +2,7 @@ const closeModal = () => {
   document.querySelector("#imgModal").style.display = "none";
   console.log("closeModal");
 };
+
 // Draw Star and background
 window.onload = () => {
   const canvas = document.querySelector("canvas");
@@ -70,6 +71,22 @@ window.onload = () => {
       ctx.closePath();
       ctx.restore();
     };
+
+    this.animationDraw = function(){
+      ctx.save();
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
+      this.x++;
+      this.y++;
+      ctx.translate(this.x, this.y);
+      ctx.shadowColor = "#edecda"; //'#e3eaef';
+      ctx.shadowBlur = Math.random() * 20 + 20;
+
+      ctx.fillStyle = "#fff";
+      ctx.fill();
+      ctx.closePath();
+      ctx.restore();
+    }
 
     this.drawImage = function(src) {
       let newImage = new Image();
@@ -255,6 +272,18 @@ window.onload = () => {
   };
 
   //createImageOnStars();
+
+
+  //shooting stars
+  const animateStar = () => {
+    window.requestAnimationFrame(animateStar);
+    let shootingStarX = Math.random() * canvas.width;
+    let shootingStarY = Math.random() * 10 + 7;
+    shootingStar = new Star(shootingStarX, shootingStarY);
+    shootingStar.animationDraw();
+  }
+
+  //animateStar();
 
   //Slide
   const displayModal = () => {
