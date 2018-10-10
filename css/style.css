@@ -9,9 +9,16 @@
 :root {
   /* font */
   --font-title: "Montserrat", sans-serif;
-  --font-content: "Roboto Condensed", sans-serif;
+	--font-content: 'Indie Flower', cursive;
   /* color*/
-  --light-yellow: #f4f7dc;
+	--light-yellow: #f4f7dc;
+	--dark-grey : #353638;
+	--brown : #584B4F;
+	--yellow : #FFD152;
+	--light-yellow : #EED9B7;
+	--emerald-green : #78AF9F;
+	--orange : #C5692E;
+	--dark-blue : #3f586b; 
   --super-dark-cyan: #003f3f;
   --dark-cyan: #008b8b;
   --middle-cyan: #00bebe;
@@ -23,7 +30,7 @@
   --orange: #ffa500;
   --orange-red: #ff4500;
   --gold: #ffd700;
-  --light-slate-gray: #778899;
+  --light-slate-gray: #e7eaed;
   --white: #ffffff;
 }
 
@@ -31,89 +38,182 @@ body {
   margin: auto;
 }
 
-.imageWrapper {
-  margin: auto;
+.container {
+	position: relative;
 }
 
-.default-images {
-  border-radius: 50%;
+#canvas {
+	position: relative;
+}
+
+/****** Wrapper for modal *******/
+.imageWrapper {
+	margin: auto;
+	display: flex;
 }
 
 .modal {
-  display: none;
-  position: fixed;
-  z-index: 1;
-  padding-top: 100px;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  overflow: auto;
-  background-color: black;
+	display: none;
+	position: fixed;
+	z-index: 1;
+	padding-top: 100px;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	overflow: auto;
+	background-color: rgba(81,86,93, 0.5);
 }
 
 .modal_content {
-  position: relative;
-  background-color: #fefefe;
-  margin: auto;
-  padding: 0;
-  width: 70%;
-  max-width: 1000px;
+	position: relative;
+	margin: auto;
+	padding: 0;
+	width: 70%;
+	max-width: 1000px;
+}
+
+.imgSlide {
+	display: none;
+	background-color: var(--light-slate-gray);
+	border-radius : 15px;
+	flex: 1;
+	padding: 20px;
+}
+
+/* .modal_display{
+	display: flex;
+} */
+
+/* image inside of imgSlide modal_display*/
+.starImgWrapper{
+	display: flex;
+	flex-direction : column;
+}
+
+.fa-star-half-alt{
+	color : var(--yellow);
+	font-size : 100px;
+	flex : 0.2;
+}
+
+.numbertext {
+	color: var(--super-dark-grey);
+	font-size: 30px;
+	padding: 8px 12px;
+	position: absolute;
+	bottom: 20px;
+	left: 10px;
+	font-weight : 900;
+	color: var(--dark-grey);
+	flex: 1;
+}
+
+.modal_image{
+	width : 20rem;
+	height: 8rem;
+	max-width: 300px;
+	max-height: 400px;
+	border-radius: 15px;
+	box-shadow: 0px 6px 5px var(--super-dark-grey);
+	flex: 0.6;
+	z-index: 2;
+}
+
+.personInfo{
+	font-family: var(--font-content);
+	font-size : 25px;
+	color : var(--dark-grey);
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	flex-wrap: wrap;
+}
+
+.personInfo div{
+	margin-left : 2rem;
+	margin-top: 1rem;
+	padding: 0.5rem;
+	animation-duration: 3s;
+	animation-name: slidein;
+}
+
+@keyframes slidein {
+	from {
+		margin-left: 100%;
+		width: 150%; 
+	}
+
+	75% {
+		font-size: 200%;
+		margin-left: 25%;
+		width: 120%;
+	}
+
+	to {
+		margin-left: 0%;
+		width: 100%;
+	}
+}
+
+.personInfo div span{
+	color : var(--emerald-green);
+	font-weight: 900;
+}
+
+#nameStyle{
+	color: var(--brown);
+	font-size: 30px;
+	-webkit-animation-name: nameStandOut; /* Safari 4.0 - 8.0 */
+	-webkit-animation-duration: 3s; /* Safari 4.0 - 8.0 */
+	animation-name: nameStandOut;
+	animation-duration: 3s;
+	animation-iteration-count: 2;
+}
+
+@keyframes nameStandOut {
+	from {color: var(--brown);
+				font-size: 30px;
+				text-shadow: .5px .5px #222;}
+	to {color: var(--yellow);
+			font-size: 35px;
+			text-shadow: .5px .5px #222;}
 }
 
 /* The Close Button */
 .close {
-  color: grey;
-  background: white;
-  border-radius: 50%;
-  position: absolute;
-  top: 100px;
-  right: 200px;
-  font-size: 50px;
-  font-weight: bold;
-  z-index: 2;
+	color: var(--light-yellow);
+	background: var(--dark-blue);
+	border-radius: 10px;
+	position: absolute;
+	top: 120px;
+	right: 250px;
+	font-size: 50px;
+	width: 50px;
+	font-weight: bold;
+	z-index: 2;
+	text-align : center;
 }
 
 .close:hover,
 .close:focus {
-  color: #999;
-  text-decoration: none;
-  cursor: pointer;
+	color: #999;
+	text-decoration: none;
+	cursor: pointer;
 }
 
-/* Hide the slides by default */
-.imgSlide {
-  display: none;
-}
-
-.numbertext {
-  color: #f2f2f2;
-  font-size: 30px;
-  padding: 8px 12px;
-  position: absolute;
-  top: 0;
-}
-
-.container {
-  position: relative;
-}
-
-#canvas {
-  position: relative;
-}
-
+/* drawn container in canvas*/
 .infoContainer {
-  display: none;
-  position: absolute;
-  width: 200px;
+	display: none;
+	position: absolute;
+	width: 200px;
 	height: 300px;
 	border-radius: 20px;
-  border: 2px solid #ccc;
+	border: 2px solid #ccc;
 }
 
 img{
-	width: 30px;
-	height: 100px;
 	border-radius: 50%;
-	position: absolute;
 }
+
+
