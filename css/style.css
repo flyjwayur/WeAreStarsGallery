@@ -8,10 +8,8 @@
 
 :root {
   /* font */
-  --font-title: "Montserrat", sans-serif;
   --font-content: "Indie Flower", cursive;
   /* color*/
-  --light-yellow: #f4f7dc;
   --dark-grey: #353638;
   --brown: #584b4f;
   --yellow: #ffd152;
@@ -19,19 +17,7 @@
   --emerald-green: #78af9f;
   --orange: #c5692e;
   --dark-blue: #3f586b;
-  --super-dark-cyan: #003f3f;
-  --dark-cyan: #008b8b;
-  --middle-cyan: #00bebe;
-  --middle-light-cyan: #d2ffff;
-  --light-cyan: #d1ffff;
-  --super-dark-grey: #18191b;
-  --dark-grey: #51565d;
-  --middle-grey: #757c86;
-  --orange: #ffa500;
-  --orange-red: #ff4500;
-  --gold: #ffd700;
   --light-slate-gray: #e7eaed;
-  --white: #ffffff;
 }
 
 body {
@@ -46,17 +32,17 @@ body {
   position: relative;
 }
 
-/****** Wrapper for modal *******/
+/****** Wrapper for lightbox *******/
 .imageWrapper {
   margin: auto;
   display: flex;
 }
 
-.modal {
+.lightBoxWrapper {
   display: none;
   position: fixed;
   z-index: 1;
-  padding-top: 100px;
+  padding-top: 6em;
   left: 0;
   top: 0;
   width: 100%;
@@ -65,12 +51,12 @@ body {
   background-color: rgba(81, 86, 93, 0.5);
 }
 
-.modal_content {
+.lightBoxContent {
   position: relative;
   margin: auto;
   padding: 0;
   width: 70%;
-  max-width: 1000px;
+  max-width: 90%;
 }
 
 .imgSlide {
@@ -78,17 +64,15 @@ body {
   background-color: var(--light-slate-gray);
   border-radius: 15px;
   flex: 1;
-  padding: 20px;
+	padding: 20px;
+	flex-wrap : wrap;
 }
 
-/* .modal_display{
-	display: flex;
-} */
-
-/* image inside of imgSlide modal_display*/
+/* style for elements inside of imgSlide */
 .starImgWrapper {
   display: flex;
-  flex-direction: column;
+	flex-direction: column;
+	flex: 0.4;
 }
 
 .fa-star-half-alt {
@@ -97,23 +81,27 @@ body {
   flex: 0.2;
 }
 
+.nameDiv{
+	flex: 0.2;
+}
+
 .numbertext {
   color: var(--super-dark-grey);
   font-size: 30px;
-  padding: 8px 12px;
+  padding: 20px 12px;
   position: absolute;
-  bottom: 20px;
-  left: 10px;
+  bottom: 0.1em;
+  right: 1em;
   font-weight: 900;
   color: var(--dark-grey);
-  flex: 1;
+	flex: 1;
 }
 
-.modal_image {
-  width: 20rem;
-  height: 8rem;
-  max-width: 300px;
-  max-height: 400px;
+.personImage {
+  width: 15em;
+  height: 20em;
+  max-width: 15em;
+  max-height: 20em;
   border-radius: 15px;
   box-shadow: 0px 6px 5px var(--super-dark-grey);
   flex: 0.6;
@@ -133,7 +121,7 @@ body {
 .personInfo div {
   margin-left: 2rem;
   margin-top: 1rem;
-  padding: 0.5rem;
+  padding: 0.2rem;
 }
 
 .personInfo div span {
@@ -148,7 +136,7 @@ body {
   -webkit-animation-duration: 3s; /* Safari 4.0 - 8.0 */
   animation-name: nameStandOut;
   animation-duration: 3s;
-  animation-iteration-count: 2;
+	animation-iteration-count: 2;
 }
 
 @keyframes nameStandOut {
@@ -158,10 +146,15 @@ body {
     text-shadow: 0.5px 0.5px #222;
   }
   50% {
-    color: var(--yellow);
+    color: var(--orange);
     font-size: 35px;
     text-shadow: 0.5px 0.5px #222;
-  }
+	}
+	75%{
+		color: var(--yellow);
+		font-size: 30px;
+		text-shadow: 0.5px 0.5px #222;
+	}
   to {
     color: var(--brown);
     font-size: 30px;
@@ -169,14 +162,14 @@ body {
   }
 }
 
-/* The Close Button */
+/* The close Button */
 .close {
   color: var(--light-yellow);
   background: var(--dark-blue);
   border-radius: 10px;
-  position: absolute;
-  top: 120px;
-  right: 250px;
+	position: absolute;
+	top: 5%;
+	right: 5%;
   font-size: 50px;
   width: 50px;
   font-weight: bold;
@@ -192,15 +185,6 @@ body {
 }
 
 /* drawn container in canvas*/
-.infoContainer {
-  display: none;
-  position: absolute;
-  width: 200px;
-  height: 300px;
-  border-radius: 20px;
-  border: 2px solid #ccc;
-}
-
 img {
   border-radius: 50%;
 }
