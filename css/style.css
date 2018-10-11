@@ -66,6 +66,7 @@ body {
   flex: 1;
 	padding: 20px;
 	flex-wrap : wrap;
+	transition: 5s ease-in;
 }
 
 /* style for elements inside of imgSlide */
@@ -183,6 +184,33 @@ body {
   text-decoration: none;
   cursor: pointer;
 }
+/**/
+
+/* Next & previous buttons */
+.prev,
+.next {
+	cursor: pointer;
+	position: absolute;
+	top: 50%;
+	width: auto;
+	padding: 16px;
+	margin-top: -50px;
+	color: var(--light-yellow);
+	font-weight: bold;
+	font-size: 6em;
+	transition: 0.6s ease;
+}
+
+/* next button to the right */
+.next {
+	right: 0
+}
+
+/* When hover, add a black background color to prev/next button */
+.prev:hover,
+.next:hover {
+	background-color: rgba(0, 0, 0, 0.5);
+} 
 
 /* drawn container in canvas*/
 img {

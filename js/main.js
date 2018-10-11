@@ -1,9 +1,103 @@
 /****** Light box ****/
+let selectedIndex = 0;
 
 //close the light box
 const closeLightBox = () => {
   document.querySelector("#lightBox").style.display = "none";
   console.log("closeLightBox");
+};
+
+const plusSlides = n => {
+  showSlides((selectedIndex += n));
+};
+
+/****** Light box ****/
+
+//Display light box with information
+const displayLightBox = () => {
+  //createModalHTMLelements(); // check!!
+  let lightBoxContent = document.querySelector(".lightBoxContent");
+  infoData.forEach((info, index) => {
+    if (
+      info.title == "" ||
+      info.joinedOn == "" ||
+      info.whySoftwareDeveloper == "" ||
+      info.longTermVision == "" ||
+      info.motivatesMe == "" ||
+      info.favoriteQuote == ""
+    ) {
+      let smileFill = `<i class="far fa-smile-wink" style="color:lightblue"></i>`;
+
+      info.title = smileFill;
+      info.joinedOn = smileFill;
+      info.whySoftwareDeveloper = smileFill;
+      info.longTermVision = smileFill;
+      info.motivatesMe = smileFill;
+      info.favoriteQuote = smileFill;
+    }
+
+    //index for slide number
+    let slideIndex = index + 1;
+
+    lightBoxContent.insertAdjacentHTML(
+      "beforeend",
+      `<div class="imgSlide">
+        <div class="starImgWrapper">
+          <i class="fas fa-star-half-alt"></i>
+          <div class="nameDiv"><span id="nameStyle">${info.firstName} ${info.lastName}</span></div>
+          <img class="personImage" src="images/${info.src}">
+          <div class="numbertext">${slideIndex} / ${infoData.length}</div>
+        </div>
+        <div class="personInfo">
+          <div>I am <span>${info.title}</span> in Integrify.</div>
+          <div>I joined Integrify <span>${info.joinedOn}</span>.</div>
+          <div>I want to be a software developer,</div>
+          <div>because <span>${info.whySoftwareDeveloper}</span>.</div>     
+          <div>I have Awesome Skills of <span>${info.skills.join(
+            ""
+          )}</span></div>
+          <div>I want to achieve <span>${info.longTermVision}</span></div>
+          <div><span>${info.motivatesMe}</span> is my Motivation</div>
+          <div>I want to introduce my favorite quote which is </br>
+              <span>"${info.favoriteQuote}"</span></div>
+        </div>
+      </div>`
+    );
+  });
+};
+
+displayLightBox();
+
+//Open lightbox
+const openLightBox = () => {
+  document.querySelector("#lightBox").style.display = "block";
+  console.log("openLightBox");
+};
+
+
+//Show hidden slide
+const showSlides = n => {
+  selectedIndex = n;
+  let slides = document.querySelectorAll(".imgSlide");
+  console.log(slides.length);
+  console.log("check n:", n);
+  if (n > slides.length-1) {
+    selectedIndex = 0;
+  }
+  if (n = 0) {
+    selectedIndex = slides.length;
+  }
+
+  for (i = 0; i < slides.length; i++) {
+    slides[i].style.display = "none";
+  }
+  slides[selectedIndex].style.display = "flex";
+};
+
+//Give current slide index 
+const currentSlide = n => {
+  showSlides(selectedIndex = n);
+  console.log("current index", n);
 };
 
 
@@ -228,100 +322,6 @@ drawStar();
   };
 
 
-  /****** Light box ****/
-
-  //Display light box with information
-  const displayLightBox = () => {
-    //createModalHTMLelements(); // check!!
-    let lightBoxContent = document.querySelector(".lightBoxContent");
-    infoData.forEach((info, index) => {
-      if (
-        info.title == "" ||
-        info.joinedOn == "" ||
-        info.whySoftwareDeveloper == "" ||
-        info.longTermVision == "" ||
-        info.motivatesMe == "" ||
-        info.favoriteQuote == ""
-      ) {
-        let smileFill = `<i class="far fa-smile-wink" style="color:lightblue"></i>`;
-
-        info.title = smileFill;
-        info.joinedOn = smileFill;
-        info.whySoftwareDeveloper = smileFill;
-        info.longTermVision = smileFill;
-        info.motivatesMe = smileFill;
-        info.favoriteQuote = smileFill;
-      }
-
-      //index for slide number
-      let slideIndex = index + 1;
-
-      lightBoxContent.insertAdjacentHTML(
-        "beforeend",
-        `<div class="imgSlide">
-          <div class="starImgWrapper">
-            <i class="fas fa-star-half-alt"></i>
-            <div class="nameDiv"><span id="nameStyle">${info.firstName} ${info.lastName}</span></div>
-            <img class="personImage" src="images/${info.src}">
-            <div class="numbertext">${slideIndex} / ${infoData.length}</div>
-          </div>
-          <div class="personInfo">
-            <div>I am <span>${info.title}</span> in Integrify.</div>
-            <div>I joined Integrify <span>${info.joinedOn}</span>.</div>
-            <div>I want to be a software developer,</div>
-            <div>because <span>${info.whySoftwareDeveloper}</span>.</div>     
-            <div>I have Awesome Skills of <span>${info.skills.join(
-              ""
-            )}</span></div>
-            <div>I want to achieve <span>${info.longTermVision}</span></div>
-            <div><span>${info.motivatesMe}</span> is my Motivation</div>
-            <div>I want to introduce my favorite quote which is </br>
-                <span>"${info.favoriteQuote}"</span></div>
-          </div>
-        </div>`
-      );
-    });
-  };
-
-  displayLightBox();
-
-  //Open lightbox
-  const openLightBox = () => {
-    document.querySelector("#lightBox").style.display = "block";
-    console.log("openLightBox");
-  };
-
-
-  //Show hidden slide
-  const showSlides = n => {
-    let slideIndex = n;
-    let slides = document.querySelectorAll(".imgSlide");
-
-    if (n > slides.length) {
-      slideIndex = 0;
-    }
-    if (n < 0) {
-      slideIndex = slides.length;
-    }
-
-    for (i = 0; i < slides.length; i++) {
-      slides[i].style.display = "none";
-    }
-    slides[slideIndex].style.display = "flex";
-  };
-
-  const plusSlides = n => {
-    showSlides((slideIndex += n));
-  };
-
-
-  //Give current slide index 
-  const currentSlide = n => {
-    showSlides((slideIndex = n));
-    console.log("current index", n);
-  };
-
-
 //When user click on star, open modal box and display related information
   canvas.addEventListener("click", e => {
     stars.forEach(star => {
@@ -343,9 +343,10 @@ drawStar();
           slide.style.left = slideY;
           slide.style.display = "block";
           console.log("seleted star index:", star.index);
-
-          openLightBox();
-          currentSlide(`${star.index}`);
+          selectedIndex = star.index;
+          openLightBox(selectedIndex);
+          currentSlide(selectedIndex);
+          //plusSlides(`${selectedIndex}`);
 
         } else {
           slide.style.display = "none";
