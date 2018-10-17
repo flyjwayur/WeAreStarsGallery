@@ -1,6 +1,7 @@
 /****** Light box ****/
 let selectedIndex = 0;
 
+let stars = [];
 //close the light box
 const closeLightBox = () => {
   document.querySelector("#lightBox").style.display = "none";
@@ -264,7 +265,7 @@ const drawCanvas = () => {
   };
 
   //Hold all created stars to draw
-  const stars = createStars();
+  stars = createStars();
   console.log(stars);
 
   //Draw stars
