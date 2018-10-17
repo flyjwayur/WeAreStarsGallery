@@ -239,7 +239,7 @@ const drawCanvas = () => {
     const getAngleDelta = () => {
       var d = new Date();
       var n = d.getTime();
-      return n / 1000 
+      return n / (5000 * Math.PI);
     }
 
     for (let i = 0; i < numStar; i++) {
