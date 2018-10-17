@@ -153,10 +153,10 @@ const drawCanvas = () => {
   writeClickOnOurStars();
 
   //Star constructor fn
-  function Star(starX, starY) {
+  function Star(starX, starY, radius) {
     this.x = starX;
     this.y = starY;
-    this.radius = Math.random() * 10 + 10;
+    this.radius = Math.max(12, Math.min(radius, 20));
     this.selected = false;
     this.index = 0;
     this.name = "";
@@ -167,7 +167,7 @@ const drawCanvas = () => {
       ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
 
       ctx.shadowColor = "#edecda"; 
-      ctx.shadowBlur = Math.random() * 20 + 20;
+      ctx.shadowBlur = 30;
 
       ctx.fillStyle = "#fff";
       ctx.fill();
@@ -247,7 +247,7 @@ const drawCanvas = () => {
       let angle = baseAngle + getAngleDelta();
       let x = canvas.width * 0.4 * Math.cos(angle) + canvas.width / 2;
       let y = canvas.height * 0.35 * Math.sin(angle) + canvas.height / 2;
-      stars.push(new Star(x, y));
+      stars.push(new Star(x, y, i * 2));
     }
     return stars;
   };
