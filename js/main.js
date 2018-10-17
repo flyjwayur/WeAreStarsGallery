@@ -8,7 +8,8 @@ const closeLightBox = () => {
 };
 
 const plusSlides = n => {
-  showSlides((selectedIndex += n));
+  selectedIndex += n;
+  showSlides(selectedIndex);
 };
 
 /****** Light box ****/
