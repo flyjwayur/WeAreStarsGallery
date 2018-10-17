@@ -101,6 +101,12 @@ const currentSlide = n => {
 };
 
 
+const getAngleDelta = () => {
+  var d = new Date();
+  var n = d.getTime();
+  return n / (5000 * Math.PI);
+}
+
 /****** Draw Main Page with stars and bg ****/
 
 // Draw Star and background
@@ -236,11 +242,6 @@ const drawCanvas = () => {
     //   }
     //   stars.push(new Star(randomX, randomY));
     // }
-    const getAngleDelta = () => {
-      var d = new Date();
-      var n = d.getTime();
-      return n / (5000 * Math.PI);
-    }
 
     for (let i = 0; i < numStar; i++) {
       let baseAngle = (i / (numStar / 2)) * Math.PI;
