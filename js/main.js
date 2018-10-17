@@ -5,7 +5,6 @@ let stars = [];
 //close the light box
 const closeLightBox = () => {
   document.querySelector("#lightBox").style.display = "none";
-  console.log("closeLightBox");
 };
 
 const plusSlides = n => {
@@ -75,15 +74,12 @@ displayLightBox();
 //Open lightbox
 const openLightBox = () => {
   document.querySelector("#lightBox").style.display = "block";
-  console.log("openLightBox");
 };
 
 //Show hidden slide
 const showSlides = n => {
   selectedIndex = n;
   let slides = document.querySelectorAll(".imgSlide");
-  console.log(slides.length);
-  console.log("check n:", n);
   if (n > slides.length - 1) {
     selectedIndex = 0;
   }
@@ -100,7 +96,6 @@ const showSlides = n => {
 //Give current slide index
 const currentSlide = n => {
   showSlides((selectedIndex = n));
-  console.log("current index", n);
 };
 
 const getAngleDelta = () => {
@@ -216,7 +211,6 @@ const drawCanvas = () => {
     this.drawImage = function(src) {
       let newImage = new Image();
       newImage.src = `images/${src}`;
-      console.log(newImage.src);
       newImage.addEventListener("load", () => {
         ctx.drawImage(newImage, this.x, this.y, 100, 150);
       });
@@ -266,7 +260,6 @@ const drawCanvas = () => {
 
   //Hold all created stars to draw
   stars = createStars();
-  console.log(stars);
 
   //Draw stars
   const drawStar = () => {
@@ -359,7 +352,6 @@ const drawCanvas = () => {
           slide.style.top = slideX;
           slide.style.left = slideY;
           slide.style.display = "block";
-          console.log("seleted star index:", star.index);
           selectedIndex = star.index;
           openLightBox(selectedIndex);
           currentSlide(selectedIndex);
