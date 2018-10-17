@@ -85,8 +85,8 @@ const showSlides = n => {
   if (n > slides.length - 1) {
     selectedIndex = 0;
   }
-  if ((n = 0)) {
-    selectedIndex = slides.length;
+  if (n < 0) {
+    selectedIndex = slides.length - 1;
   }
 
   for (i = 0; i < slides.length; i++) {
