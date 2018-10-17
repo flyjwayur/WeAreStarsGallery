@@ -366,3 +366,10 @@ window.onload = drawCanvas;
 
 //When window is resized, drawCanvas to be responsive to the size of screen
 window.addEventListener("resize", drawCanvas);
+
+const updateAnimation = () => {
+  drawCanvas();
+  window.requestAnimationFrame(updateAnimation);
+};
+
+window.requestAnimationFrame(updateAnimation);
