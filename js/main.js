@@ -221,7 +221,7 @@ const drawCanvas = () => {
 
 //Create stars
   const createStars = () => {
-    let stars = [];
+    let newStars = [];
     let numStar = infoData.length;
     // for (let i = 0; i < numStar; i++) {
     //   let randomX = Math.random() * canvas.width * 0.8 + canvas.width * 0.1;
@@ -247,9 +247,9 @@ const drawCanvas = () => {
       let angle = baseAngle + getAngleDelta();
       let x = canvas.width * 0.4 * Math.cos(angle) + canvas.width / 2;
       let y = canvas.height * 0.35 * Math.sin(angle) + canvas.height / 2;
-      stars.push(new Star(x, y, i * 2));
+      newStars.push(new Star(x, y, i * 2));
     }
-    return stars;
+    return newStars;
   };
 
 //Hold all created stars to draw
