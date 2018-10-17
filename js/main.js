@@ -236,11 +236,17 @@ const drawCanvas = () => {
     //   }
     //   stars.push(new Star(randomX, randomY));
     // }
+    const getAngleDelta = () => {
+      var d = new Date();
+      var n = d.getTime();
+      return n / 1000 
+    }
 
     for (let i = 0; i < numStar; i++) {
       let baseAngle = (i / (numStar / 2)) * Math.PI;
-      let x = canvas.width * 0.4 * Math.cos(baseAngle) + canvas.width / 2;
-      let y = canvas.height * 0.35 * Math.sin(baseAngle) + canvas.height / 2;
+      let angle = baseAngle + getAngleDelta();
+      let x = canvas.width * 0.4 * Math.cos(angle) + canvas.width / 2;
+      let y = canvas.height * 0.35 * Math.sin(angle) + canvas.height / 2;
       stars.push(new Star(x, y));
     }
     return stars;
