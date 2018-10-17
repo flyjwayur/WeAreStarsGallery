@@ -107,6 +107,14 @@ const getAngleDelta = () => {
   return n / (5000 * Math.PI);
 }
 
+const getStarsXYposition = (starIndex, numStar) => {
+  let baseAngle = (starIndex / (numStar / 2)) * Math.PI;
+  let angle = baseAngle + getAngleDelta();
+  let x = canvas.width * 0.4 * Math.cos(angle) + canvas.width / 2;
+  let y = canvas.height * 0.35 * Math.sin(angle) + canvas.height / 2;
+  return [x, y];
+};
+
 /****** Draw Main Page with stars and bg ****/
 
 // Draw Star and background
@@ -244,11 +252,8 @@ const drawCanvas = () => {
     // }
 
     for (let i = 0; i < numStar; i++) {
-      let baseAngle = (i / (numStar / 2)) * Math.PI;
-      let angle = baseAngle + getAngleDelta();
-      let x = canvas.width * 0.4 * Math.cos(angle) + canvas.width / 2;
-      let y = canvas.height * 0.35 * Math.sin(angle) + canvas.height / 2;
-      newStars.push(new Star(x, y, i * 2));
+      let starXY = getStarsXYposition(i, numStar);
+      newStars.push(new Star(starXY[0], starXY[1], i * 2));
     }
     return newStars;
   };
