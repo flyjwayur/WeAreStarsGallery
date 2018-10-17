@@ -238,9 +238,9 @@ const drawCanvas = () => {
     // }
 
     for (let i = 0; i < numStar; i++) {
-      let angle = (i / (numStar / 2)) * Math.PI;
-      let x = canvas.width * 0.4 * Math.cos(angle) + canvas.width / 2;
-      let y = canvas.height * 0.35 * Math.sin(angle) + canvas.height / 2;
+      let baseAngle = (i / (numStar / 2)) * Math.PI;
+      let x = canvas.width * 0.4 * Math.cos(baseAngle) + canvas.width / 2;
+      let y = canvas.height * 0.35 * Math.sin(baseAngle) + canvas.height / 2;
       stars.push(new Star(x, y));
     }
     return stars;
