@@ -44,7 +44,9 @@ const displayLightBox = () => {
       `<div class="imgSlide">
         <div class="starImgWrapper">
           <i class="fas fa-star-half-alt"></i>
-          <div class="nameDiv"><span id="nameStyle">${info.firstName} ${info.lastName}</span></div>
+          <div class="nameDiv"><span id="nameStyle">${info.firstName} ${
+        info.lastName
+      }</span></div>
           <img class="personImage" src="images/${info.src}">
           <div class="numbertext">${slideIndex} / ${infoData.length}</div>
         </div>
@@ -74,17 +76,16 @@ const openLightBox = () => {
   console.log("openLightBox");
 };
 
-
 //Show hidden slide
 const showSlides = n => {
   selectedIndex = n;
   let slides = document.querySelectorAll(".imgSlide");
   console.log(slides.length);
   console.log("check n:", n);
-  if (n > slides.length-1) {
+  if (n > slides.length - 1) {
     selectedIndex = 0;
   }
-  if (n = 0) {
+  if ((n = 0)) {
     selectedIndex = slides.length;
   }
 
@@ -94,18 +95,17 @@ const showSlides = n => {
   slides[selectedIndex].style.display = "flex";
 };
 
-//Give current slide index 
+//Give current slide index
 const currentSlide = n => {
-  showSlides(selectedIndex = n);
+  showSlides((selectedIndex = n));
   console.log("current index", n);
 };
-
 
 const getAngleDelta = () => {
   var d = new Date();
   var n = d.getTime();
   return n / (5000 * Math.PI);
-}
+};
 
 const getStarsXYposition = (starIndex, numStar) => {
   let baseAngle = (starIndex / (numStar / 2)) * Math.PI;
@@ -132,7 +132,7 @@ const drawCanvas = () => {
     backgroundGradient.addColorStop(1, "#3f586b");
     ctx.fillStyle = backgroundGradient;
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-  }
+  };
 
   drawBackground();
 
@@ -161,7 +161,11 @@ const drawCanvas = () => {
     ctx.font = `${canvas.width / 30}px Times New Roman, Times, serif`;
     ctx.textAlign = "center";
     ctx.fillStyle = gradient;
-    ctx.fillText("Click on our stars :)", canvas.width / 2 , (canvas.height / 1.7));
+    ctx.fillText(
+      "Click on our stars :)",
+      canvas.width / 2,
+      canvas.height / 1.7
+    );
   }
 
   writeClickOnOurStars();
@@ -180,7 +184,7 @@ const drawCanvas = () => {
       ctx.beginPath();
       ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, false);
 
-      ctx.shadowColor = "#edecda"; 
+      ctx.shadowColor = "#edecda";
       ctx.shadowBlur = 30;
 
       ctx.fillStyle = "#fff";
@@ -224,7 +228,7 @@ const drawCanvas = () => {
       for (let star of stars) {
         if (
           Math.abs(star.x - randomX) < distanceToKeep &&
-          Math.abs(star.y - randomY) < distanceToKeep 
+          Math.abs(star.y - randomY) < distanceToKeep
         ) {
           return false;
         }
@@ -233,7 +237,7 @@ const drawCanvas = () => {
     }
   };
 
-//Create stars
+  //Create stars
   const createStars = () => {
     let newStars = [];
     let numStar = infoData.length;
@@ -258,21 +262,21 @@ const drawCanvas = () => {
     return newStars;
   };
 
-//Hold all created stars to draw
+  //Hold all created stars to draw
   const stars = createStars();
   console.log(stars);
 
-//Draw stars
-const drawStar = () => {
-  stars.forEach((star, index) => {
-    star.index = index;
-    star.draw();
-  });
-};
+  //Draw stars
+  const drawStar = () => {
+    stars.forEach((star, index) => {
+      star.index = index;
+      star.draw();
+    });
+  };
 
-drawStar();
+  drawStar();
 
-//Draw First Name from data above stars
+  //Draw First Name from data above stars
   const drawNameAboveStars = () => {
     stars.forEach((star, index) => {
       star.index = index;
@@ -324,7 +328,7 @@ drawStar();
 
   //createImageOnStars();
 
-  //Check whether users click on the stars 
+  //Check whether users click on the stars
   const isClickInStar = function(mouseX, mouseY, star) {
     let radius = star.radius;
     return (
@@ -333,8 +337,7 @@ drawStar();
     );
   };
 
-
-//When user click on star, open modal box and display related information
+  //When user click on star, open modal box and display related information
   canvas.addEventListener("click", e => {
     stars.forEach(star => {
       let slide = document.querySelector(".imgSlide");
@@ -359,7 +362,6 @@ drawStar();
           openLightBox(selectedIndex);
           currentSlide(selectedIndex);
           //plusSlides(`${selectedIndex}`);
-
         } else {
           slide.style.display = "none";
         }
