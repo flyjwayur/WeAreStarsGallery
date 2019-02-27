@@ -1,22 +1,26 @@
-# We are Stars :D 
-## Image Gallery for our Group in Integrify.
+# We are Stars :D
 
-### 1. Introduction 
-Theme : Each memeber in our group is special like a star. 
-![Demo video](images/account_balance_tracker.gif)
+### 1. Introduction
 
-### 2. Features 
+Do you want to meet our group?
+Here is a Image Gallery of our Group in Integrify.
+(Images are huge, so it takes a time to load)
 
-* Make us STAR XD.
-* Draw stars, title and background in canvas.
-* Click on stars, light boxs will pop up with info.
-* Move to previous image and next image.
-* Be responsive to different screen.
+### 1) Gallery Intro
 
+![ImageGalleryIntro](assets/galleryIntro.png)
 
-### 3. Demo 
+### 2) Image & info with Lightbox
 
-* Main page
-![Demo main image](images/main.png)
-* LightBox page
-![Demo lightbox image](images/lightbox.png)
+![ImageGalleryDetail](assets/galleryOnLightbox.png)
+
+- Theme : Each member in our group is special like a star.
+- Demo : https://wearestarsgallery.netlify.com/
+
+### 2. Features
+
+- Make us STAR XD.
+- Draw stars, title and background with canvas.
+- Click on stars, light boxs will pop up with info.
+- Move to previous image and next image.
+- Be responsive to different screen.
